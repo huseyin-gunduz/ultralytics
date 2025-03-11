@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
     elapsed_time = end_time - start_time
 
-    path = os.path.join("runs", "detect", experiment_name, "training_time.txt")
+    path = os.path.join("D:/runs/detect", experiment_name, "training_time.txt")
 
     with open(path, "w") as f:
         f.write(f'{elapsed_time}')
