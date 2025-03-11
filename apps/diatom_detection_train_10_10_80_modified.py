@@ -13,7 +13,7 @@ if __name__ == '__main__':
 
     results = model.train(data="diatom_train_10_10_80_modified.yaml",
                           epochs=25,
-                          project="runs/detect",
+                          project="D:/runs/detect",
                           name=experiment_name
                           )
 

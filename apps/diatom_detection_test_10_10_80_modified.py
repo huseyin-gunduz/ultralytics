@@ -8,9 +8,9 @@ if __name__ == '__main__':
 
     start_time = time.perf_counter()
 
-    model = YOLO(os.path.join("runs/detect", experiment_name, "weights/best.pt"))  # load the model
+    model = YOLO(os.path.join("D:/runs/detect", experiment_name, "weights/best.pt"))  # load the model
     metrics = model.val(data="diatom_test_10_10_80_modified.yaml",
-                        project="runs/predict",
+                        project="D:/runs/predict",
                         name=experiment_name)
 
     end_time = time.perf_counter()
