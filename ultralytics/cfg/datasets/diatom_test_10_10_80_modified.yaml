@@ -1,0 +1,85 @@
+# YOLOv5 🚀 by Ultralytics, GPL-3.0 license
+# COCO128 dataset https://www.kaggle.com/ultralytics/coco128 (first 128 images from COCO train2017) by Ultralytics
+# Example usage: python train.py --data coco128.yaml
+# parent
+# ├── yolov5
+# └── datasets
+#     └── coco128  ← downloads here (7 MB)
+
+
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: D:/datasets/diatom/YoloDataset_5_800x600_augmented_test_10_val_10_train_80_modified  # dataset root dir
+train: images/train  # train images (relative to 'path') 128 images
+val: images/test  # val images (relative to 'path') 128 images
+test: images/test
+
+# Classes
+names:
+  0: Cymbella cantonatii
+  1: Fragilaria recapitellata
+  2: Nitzschia linearis
+  3: Diploneis fontanella
+  4: Gomphonema olivaceum
+  5: Meridion circulare
+  6: Adlafia minuscula
+  7: Navicula cryptocephala
+  8: Encyonema silesiacum
+  9: Encyonema ventricosum
+  10: Navicula capitatoradiata
+  11: Navicula trivialis
+  12: Pantocsekiella ocellata
+  13: Navicula tripunctata
+  14: Nitzschia archibaldii
+  15: Didymosphenia geminata
+  16: Frustulia vulgaris
+  17: Cocconeis pseudolineata
+  18: Humidophila perpusilla
+  19: Planothidium frequentissimum
+  20: Navicula cryptotenella
+  21: Navicula reichardtiana
+  22: Rhoicosphenia abbreviata
+  23: Sellaphora saugerresii
+  24: Navicula gregaria
+  25: Planothidium lanceolatum
+  26: Gomphonema pumilum
+  27: Gomphonema minutum
+  28: Diatoma mesodon
+  29: Gomphonema pumilum var.rigidum
+  30: Caloneis lancettula
+  31: Amphora pediculus
+  32: Navicula lanceolata
+  33: Sellaphora radiosa
+  34: Humidophila contenta
+  35: Navicula novaesiberica
+  36: Nitzschia palea
+  37: Achnanthidium biasolettianum
+  38: Achnanthidium minutissimum
+  39: Diatoma moniliformis
+  40: Cymbella excisa
+  41: Cymbella excisa var.procera
+  42: Gomphonema tergestinum
+  43: Halamphora veneta
+  44: Cymbopleura amphicephala
+  45: Denticula kuetzingii
+  46: Navicula cryptotenelloides
+  47: Nitzschia hantzschiana
+  48: Halamphora paraveneta
+  49: Hantzschiana abundans
+  50: Cymbella excisa var.subcapitata
+  51: Epithemia goeppertiana
+  52: Luticola nivalis
+  53: Epithemia argus
+  54: Pinnularia brebissonii
+  55: Surirella brebissonii var.kuetzingii
+  56: Gomphonema calcifugum
+  57: Gomphonema supertergestinum
+  58: Surella minuta
+  59: Gomphonema exilissimum
+  60: Navicula upsaliensis
+  61: Amphora inariensis
+  62: Navicula moskalii
+  63: Neidiomorpha binodiformis
+  64: Stauroneis blazenciciae
+  65: Nitzschia recta
+  66: Gomphonema drutelingense
+  67: Gomphonema micropus
