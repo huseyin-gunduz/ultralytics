@@ -5,11 +5,11 @@ from ultralytics import YOLO
 
 if __name__ == '__main__':
 
-    experiment_name = "train10s_ESILU"
+    experiment_name = "train9s"
 
     start_time = time.perf_counter()
 
-    model = YOLO("yolov10s.yaml").load("yolov10s.pt")  # load the model
+    model = YOLO("yolov9s.yaml").load("yolov9s.pt")  # load the model
 
     results = model.train(data="diatom_train_10_10_80_modified.yaml",
                           epochs=25,
