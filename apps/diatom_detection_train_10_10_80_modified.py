@@ -1,34 +1,41 @@
 import time
 import os
-
 from ultralytics import YOLO
+from constants import Constants
+import gc
+import torch
 
 if __name__ == '__main__':
 
-    experiment_name = "train8s"
+    root = Constants.ROOT_DIRECTORY
 
-    start_time = time.perf_counter()
+    activation_function_name = 'swish_relu'
 
-    model = YOLO("yolov8s.yaml").load("yolov8s.pt")  # load the model
+    experiment_name_List = ["yolov8s", "yolov9s", "yolov10s", "yolo11s", "yolov12s"]
 
-    results = model.train(data="diatom_train_10_10_80_modified.yaml",
-                          epochs=25,
-                          project="D:/runs/detect",
-                          name=experiment_name
-                          )
+    for experiment_name in experiment_name_List:
 
-    end_time = time.perf_counter()
+        start_time = time.perf_counter()
 
-    elapsed_time = end_time - start_time
+        filename_yaml = experiment_name + ".yaml"
+        filename_pt = experiment_name + ".pt"
 
-    path = os.path.join("D:/runs/detect", experiment_name, "training_time.txt")
+        model = YOLO(filename_yaml).load(filename_pt)  # load the model
 
-    with open(path, "w") as f:
-        f.write(f'{elapsed_time}')
+        results = model.train(data="diatom_train_10_10_80_modified.yaml",
+                              epochs=25,
+                              project=os.path.join(root, "detect"),
+                              name=experiment_name + '_' + activation_function_name
+                              )
 
+        end_time = time.perf_counter()
 
+        elapsed_time = end_time - start_time
 
+        path = os.path.join(root, "detect", experiment_name + "_" + activation_function_name, "training_time.txt")
 
+        with open(path, "w") as f:
+            f.write(f'{elapsed_time}')
 
-
-
+        gc.collect()
+        torch.cuda.empty_cache()
