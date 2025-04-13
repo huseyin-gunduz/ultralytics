@@ -3,6 +3,7 @@ import time
 import os
 from constants import Constants
 from collections import defaultdict
+
 def count_class_instances_and_images(label_dir, class_names):
     """
     Veri setindeki her bir sınıf için Instances ve Images bilgisini hesaplar.
@@ -64,6 +65,10 @@ def count_class_instances_and_images(label_dir, class_names):
 
 if __name__ == '__main__':
 
+    root = Constants.ROOT_DIRECTORY
+
+    activation_function_name = 'SILU'
+
     class_instances, class_images = count_class_instances_and_images(
         "D:/datasets/diatom/YoloDataset_5_800x600_augmented_test_10_val_10_train_80_modified/labels/test",
         Constants.DIATOM_SPECIES)
@@ -71,9 +76,7 @@ if __name__ == '__main__':
     total_images = sum(class_images.values())
     total_instances = sum(class_instances.values())
 
-    experiment_name_List = ["train8s", "train9s", "train10s", "train11s", "train12s"]
-
-    root = Constants.ROOT_DIRECTORY
+    experiment_name_List = ["yolo8", "yolo9", "yolo10", "yolo11", "yolo12"]
 
     for experiment_name in experiment_name_List:
 
@@ -81,9 +84,9 @@ if __name__ == '__main__':
 
         start_time = time.perf_counter()
 
-        model = YOLO(os.path.join(root, "detect", experiment_name, "weights/best.pt"))  # load the model
+        model = YOLO(os.path.join(root, "train", activation_function_name, experiment_name, "weights/best.pt"))  # load the model
         metrics = model.val(data="diatom_test_10_10_80_modified.yaml",
-                            project=os.path.join(root, "predict"),
+                            project=os.path.join(root, "predict", activation_function_name),
                             name=experiment_name)
 
         end_time = time.perf_counter()
@@ -91,20 +94,20 @@ if __name__ == '__main__':
         elapsed_time = end_time - start_time
 
         # write elapsed time
-        file_path_elapsed = os.path.join(root, "predict", experiment_name, "test_time.txt")
+        file_path_elapsed = os.path.join(root, "predict", activation_function_name, experiment_name, "test_time.txt")
 
         with open(file_path_elapsed, "w") as f:
             f.write(f'{elapsed_time}')
 
         # write metrics
-        file_path_metrics = os.path.join(root, "predict", experiment_name, "evaluation_results.txt")
+        file_path_metrics = os.path.join(root, "predict", activation_function_name, experiment_name, "evaluation_results.txt")
 
         with open(file_path_metrics, 'w') as f:
-            f.write("Class     Images  Instances      Box(P          R      mAP50  mAP50-95)\n")
-            #f.write("-" * 70 + "\n")
+            f.write("Class                                    Images     Instances  Box(P    R        mAP50    "
+                    "mAP50-95)\n")
 
             # Genel metrikler
-            f.write(f"{'all':<40} {total_images:<10} {total_instances:<10} {metrics.box.mp:<8.3} {metrics.box.mr:<8.3} {metrics.box.map50:<8.3f} {metrics.box.map:<8.3f}\n")
+            f.write(f"{'all':<40} {total_images:<10} {total_instances:<10} {metrics.box.mp:<8.3} {metrics.box.mr:<8.3} {metrics.box.map:<8.3f} {metrics.box.map:<8.3f}\n")
 
             # Sınıf bazında metrikler
             for i, class_index in enumerate(metrics.box.ap_class_index):

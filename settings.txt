@@ -1,0 +1,13 @@
+settings
+
+pip install opencv-python
+pip install psutil
+pip install torch==2.3.0+cu118 torchvision==0.18.0+cu118 torchaudio==2.3.0+cu118 -f https://download.pytorch.org/whl/torch_stable.html
+pip install matplotlib
+pip install pyyaml
+pip install tqdm
+pip3 install requests
+pip install numpy==1.26.4
+pip install wheel
+pip install pandas
+pip install scipy
